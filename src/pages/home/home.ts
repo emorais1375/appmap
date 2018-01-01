@@ -12,6 +12,14 @@ export class HomePage {
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
 
+  obj = {
+    local:"",
+    atividade:"",
+    log:0.0,
+    lat:0.0,
+    data: 123
+  }
+
   constructor(public navCtrl: NavController, public geolocation: Geolocation, public alertCtrl: AlertController) {
 
   }
