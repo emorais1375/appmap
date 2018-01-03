@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
 import { LugaresPageModule } from '../pages/lugares/lugares.module';
+import { GoogleMaps } from "@ionic-native/google-maps";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LugaresPageModule } from '../pages/lugares/lugares.module';
     StatusBar,
     SplashScreen,
     Geolocation,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
