@@ -96,7 +96,7 @@ export class HomePage {
             this.modelo.description = data.atividade;
             this.modelo.date = Date.now();
             this.modelo.latitude = marker.position.lat();
-            this.modelo.latitude = marker.position.lng();
+            this.modelo.longitude = marker.position.lng();
 
             /* console.log(this.lista_marker); */
             this.save();

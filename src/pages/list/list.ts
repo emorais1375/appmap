@@ -19,11 +19,11 @@ export class ListPage {
     });
   }
 
-  editContact(item: LocalList) {
-    this.navCtrl.push('EditContactPage', { key: item.key, contact: item.local });
+  editLocal(item: LocalList) {
+    this.navCtrl.push('EditLocalPage', { key: item.key, local: item.local });
   }
 
-  removeContact(item: LocalList) {
+  removeLocal(item: LocalList) {
     this.localProvider.remove(item.key).then(() => {
       // Removendo do array de items
       let index = this.locais.indexOf(item);

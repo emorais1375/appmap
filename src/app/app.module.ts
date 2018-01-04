@@ -11,11 +11,15 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { IonicStorageModule } from '@ionic/storage';
 import { DatePipe } from '@angular/common';
 import { LocalProvider } from '../providers/local/local';
+import { TabsPage } from '../pages/tabs/tabs';
+import { ListPage } from '../pages/list/list';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ListPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,9 @@ import { LocalProvider } from '../providers/local/local';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ListPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
