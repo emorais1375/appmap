@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { LocalProvider, LocalList } from '../../providers/local/local'
 
 @IonicPage()
 @Component({
@@ -14,12 +8,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'list.html',
 })
 export class ListPage {
+  locais: LocalList[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private localProvider: LocalProvider, private toast: ToastController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ListPage');
+  ionViewDidEnter() {
+    this.localProvider.getAll().then((result) => {
+      this.locais = result;
+    });
   }
 
+  editContact(item: LocalList) {
+    this.navCtrl.push('EditContactPage', { key: item.key, contact: item.local });
+  }
+
+  removeContact(item: LocalList) {
+    this.localProvider.remove(item.key).then(() => {
+      // Removendo do array de items
+      let index = this.locais.indexOf(item);
+      this.locais.splice(index, 1);
+      this.toast.create({ message: 'Local removido.', duration: 3000, position: 'botton' }).present();
+    })
+  }
 }

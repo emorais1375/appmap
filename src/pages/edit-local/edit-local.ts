@@ -13,8 +13,8 @@ export class EditLocalPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private localProvider: LocalProvider, private toast: ToastController) {
-    if (this.navParams.data.contact && this.navParams.data.key) {
-      this.model = this.navParams.data.contact;
+    if (this.navParams.data.local && this.navParams.data.key) {
+      this.model = this.navParams.data.local;
       this.key = this.navParams.data.key;
     } else {
       this.model = new Local();
