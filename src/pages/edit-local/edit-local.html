@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      AppMap
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label stacked>Nome do Lugar</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="model.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Descrição da Atividade</ion-label>
+      <ion-input type="text" name="description" [(ngModel)]="model.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Hora da Atividade</ion-label>
+      <ion-input type="number" name="date" [(ngModel)]="model.date"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Latitude</ion-label>
+      <ion-input type="number" name="latitude" [(ngModel)]="model.latitude"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Longitude</ion-label>
+      <ion-input type="number" name="longitude" [(ngModel)]="model.longitude"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button block (click)="save()">Salvar</button>
+
+</ion-content>
