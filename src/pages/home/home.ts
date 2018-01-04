@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, NavParams, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Storage } from '@ionic/storage';
+import { LocalProvider, Local } from '../../providers/local/local'
 
 declare var google;
 
@@ -14,12 +15,11 @@ export class HomePage {
   map;
   lista_marker = [];
 
+  modelo: Local;
+
   constructor(
-    public navCtrl: NavController,
-    public geolocation: Geolocation,
-    public alertCtrl: AlertController,
-    private storage: Storage
-  ) {
+    public navCtrl: NavController, public geolocation: Geolocation, public alertCtrl: AlertController,
+    private storage: Storage, private localProvider: LocalProvider, private toast: ToastController) {
     console.log("Home page creator loaded");
   }
 
@@ -83,16 +83,24 @@ export class HomePage {
         {
           text: 'REGISTRAR',
           handler: data => {
-            var obj_marker = {
+            /* var obj_marker = {
               nome_local: data.local,
               atividade: data.atividade,
               data: Date.now(),
               lat: marker.position.lat(),
               lng: marker.position.lng()
             };
-            this.lista_marker.push(obj_marker);
-            console.log(this.lista_marker);
-            this.showAlertOk();
+            this.lista_marker.push(obj_marker); */
+            this.modelo = new Local();
+            this.modelo.name = data.local;
+            this.modelo.description = data.atividade;
+            this.modelo.date = Date.now();
+            this.modelo.latitude = marker.position.lat();
+            this.modelo.latitude = marker.position.lng();
+
+            /* console.log(this.lista_marker); */
+            this.save();
+            /* this.showAlertOk(); */
           }
         }
       ]
@@ -100,13 +108,26 @@ export class HomePage {
     prompt.present();
   }
 
-  showAlertOk() {
+  /* showAlertOk() {
     let alert = this.alertCtrl.create({
       title: 'Registrado',
       subTitle: 'Local registrado',
       buttons: ['OK']
     });
     alert.present();
+  } */
+
+
+  save() {
+    this.saveContact().then(() => {
+      this.toast.create({ message: 'Local salvo.', duration: 3000, position: 'botton' }).present();
+    }).catch(() => {
+      this.toast.create({ message: 'Erro ao salvar o local.', duration: 3000, position: 'botton' }).present();
+    });
+  }
+
+  private saveContact() {
+    return this.localProvider.insert(this.modelo);
   }
 
 }
